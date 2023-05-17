@@ -19,5 +19,11 @@ namespace MyBoards.Entities
         //{
         //    optionsBuilder.UseSqlServer("Server=DESKTOP-HELIKOP;Database=EfBoardsDb;Trusted_Connection=True");
         //}
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<User>()
+        //        .HasKey(x => new {x.FirstName, x.LastName});
+        //}
     }
 }
