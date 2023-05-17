@@ -45,6 +45,13 @@ namespace MyBoards.Entities
                 eb.Property(wi => wi.RemainingWork).HasPrecision(14,2);
                 eb.Property(wi => wi.State).IsRequired();
                 eb.Property(wi => wi.Area).HasColumnType("varchar(200)");
+                eb.Property(wi => wi.Priority).HasDefaultValue(1);
+            });
+
+            modelBuilder.Entity<Comment>(eb =>
+            {
+                eb.Property(wi => wi.CreatedDate).HasDefaultValueSql("getutcdate()");
+                eb.Property(wi => wi.UpdatedDate).ValueGeneratedOnUpdate();
             });
 
         }
