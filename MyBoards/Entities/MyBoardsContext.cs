@@ -25,5 +25,28 @@ namespace MyBoards.Entities
         //    modelBuilder.Entity<User>()
         //        .HasKey(x => new {x.FirstName, x.LastName});
         //}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<WorkItem>()
+            //    .Property(w => w.State)
+            //    .IsRequired();
+
+            //modelBuilder.Entity<WorkItem>()
+            //    .Property(w => w.Area)
+            //    .HasColumnType("varchar(200)");
+
+            modelBuilder.Entity<WorkItem>(eb =>
+            {
+                eb.Property(wi => wi.IterationPath).HasColumnName("Iteration_Path");
+                eb.Property(wi => wi.Effort).HasColumnType("decimal(5,2");
+                eb.Property(wi => wi.EndDate).HasPrecision(3);
+                eb.Property(wi => wi.Activity).HasMaxLength(200);
+                eb.Property(wi => wi.RemainingWork).HasPrecision(14,2);
+                eb.Property(wi => wi.State).IsRequired();
+                eb.Property(wi => wi.Area).HasColumnType("varchar(200)");
+            });
+
+        }
     }
 }
