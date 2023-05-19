@@ -46,6 +46,13 @@ namespace MyBoards.Entities
                 eb.Property(wi => wi.State).IsRequired();
                 eb.Property(wi => wi.Area).HasColumnType("varchar(200)");
                 eb.Property(wi => wi.Priority).HasDefaultValue(1);
+                eb.HasMany(wi => wi.Comments)
+                .WithOne(c => c.WorkItem)
+                .HasForeignKey(c => c.WorkItemId);
+
+                eb.HasOne(wi => wi.Author)
+                .WithMany(a => a.WorkItems)
+                .HasForeignKey(wi => wi.AuthorId);
             });
 
             modelBuilder.Entity<Comment>(eb =>
