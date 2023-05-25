@@ -7,8 +7,14 @@ namespace MyBoards.Entities
     public class WorkItem
     {
         public int Id { get; set; }
+
+
         //[Required]
-        public string State { get; set; }
+        //public string State { get; set; }
+        public WorkItemState State { get; set; }
+        public int StateId { get; set; }
+
+
         //[Column(TypeName ="varchar(200)")]
         public string Area { get; set; }
 

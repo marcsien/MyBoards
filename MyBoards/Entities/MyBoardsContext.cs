@@ -14,6 +14,7 @@ namespace MyBoards.Entities
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<WorkItemState> WorkItemStates { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -36,14 +37,24 @@ namespace MyBoards.Entities
             //    .Property(w => w.Area)
             //    .HasColumnType("varchar(200)");
 
+            modelBuilder.Entity<WorkItemState>()
+                .Property(s => s.Value)
+                .IsRequired()
+                .HasMaxLength(50);
+
+
             modelBuilder.Entity<WorkItem>(eb =>
             {
+                eb.HasOne(w => w.State)
+                .WithMany()
+                .HasForeignKey(w => w.StateId);
+
                 eb.Property(wi => wi.IterationPath).HasColumnName("Iteration_Path");
                 eb.Property(wi => wi.Effort).HasColumnType("decimal(5,2");
                 eb.Property(wi => wi.EndDate).HasPrecision(3);
                 eb.Property(wi => wi.Activity).HasMaxLength(200);
                 eb.Property(wi => wi.RemainingWork).HasPrecision(14,2);
-                eb.Property(wi => wi.State).IsRequired();
+                //eb.Property(wi => wi.State).IsRequired();
                 eb.Property(wi => wi.Area).HasColumnType("varchar(200)");
                 eb.Property(wi => wi.Priority).HasDefaultValue(1);
                 eb.HasMany(wi => wi.Comments)
