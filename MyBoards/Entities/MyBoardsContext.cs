@@ -59,7 +59,7 @@ namespace MyBoards.Entities
 
             modelBuilder.Entity<Issue>()
                 .Property(wi => wi.Effort)
-                .HasColumnType("decimal(5,2");
+                .HasColumnType("decimal(5,2)");
 
 
             modelBuilder.Entity<WorkItem>(eb =>
