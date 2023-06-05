@@ -104,6 +104,10 @@ namespace MyBoards.Entities
             {
                 eb.Property(wi => wi.CreatedDate).HasDefaultValueSql("getutcdate()");
                 eb.Property(wi => wi.UpdatedDate).ValueGeneratedOnUpdate();
+                eb.HasOne(c => c.Author)
+                .WithMany(a => a.Comments)
+                .HasForeignKey(c => c.AuthorId)
+                .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<User>()
