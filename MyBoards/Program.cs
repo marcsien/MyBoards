@@ -21,4 +21,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapGet("data", (MyBoardsContext db) =>
+{
+    var tags = db.Tags.ToList();
+    return tags;
+});
+
 app.Run();
